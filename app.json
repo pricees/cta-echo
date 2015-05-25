@@ -1,0 +1,7 @@
+{
+  "name": "CTA-Echo",
+  "description": "Amazon Echo app for retrieving CTA information",
+  "repository": "https://github.com/pricees/cta-echo",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "chicago", "cta", "trains" ]
+}

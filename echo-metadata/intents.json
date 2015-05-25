@@ -1,0 +1,17 @@
+{
+  "intents": [
+    {
+      "intent": "TrainArrival",
+      "slots": [
+        {
+          "name": "Station",
+          "type": "LITERAL"
+        },
+        {
+          "name": "Route",
+          "type": "LITERAL"
+        }
+      ]
+    },
+  ]
+}

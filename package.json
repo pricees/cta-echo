@@ -1,0 +1,27 @@
+{
+  "name": "CTA-Echo",
+  "version": "0.0.1",
+  "description": "Amazon Echo app for retrieving CTA information",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "~4.9.x"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pricees/cta-echo"
+  },
+  "keywords": [
+    "node",
+    "chicago",
+    "cta",
+    "trains"
+  ],
+  "license": "MIT"
+}
