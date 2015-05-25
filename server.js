@@ -1,6 +1,10 @@
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
-var bodyParser = require('body-parser');
+var express      = require('express')        // call express
+    , app        = express()                 // define our app using express
+    , bodyParser = require('body-parser')
+    , cta        = require('cta-node')
+    , trainEtaHelper = require('./lib/train_eta_helper.js')
+    , dateHelper = require('./lib/date_helper.js');
+cta.init(); 
 
 app.use(bodyParser.json());
 
@@ -26,10 +30,10 @@ router.get('/', function(req, res) {
     "name": "CTA-Echo",
     "version": "0.0.1",
     "description": "Amazon Echo app for retrieving CTA information",
-    "respository": "https://github.com/pricees/cta-echo"
+    "respository": "https://github.com/pricees/cta-echo",
     "license": "MIT"
   });
-})
+});
 
 router.post('/', function(req, res) {
     var type = req.body.type;
@@ -38,21 +42,28 @@ router.post('/', function(req, res) {
 
     switch(req.body.request.type) {
       case "LaunchRequest":
-        payload = launchRequest(req);
+        return res.json(launchRequest(req));
         break;
       case "IntentRequest":
-        payload = intentRequest(req.body.request.intent);
+        try {
+        intentRequest(req.body.request.intent)
+          .then(arrivalsToText)
+          .then(function(text) { return buildResponse(text, true); })
+          .then(function(payload) { return res.json(payload) })
+          .then(null, console.log)
+          .done();
+        } catch (e) {
+          return res.json(buildResponse("An error occurred. Sorry bro.", true)); 
+        }
         break;
       case "SessionEndedRequest":
-        payload = sessionEndedRequest(req);
+        return res.json(sessionEndedRequest(req));
         break;
       default:
         var name = req.query.name;
         if (!name) name = 'Dawg';
-        payload = { message: 'Hello ' + name };   
+        return res.json({ message: 'Hello ' + name });   
     }
-
-    res.json(payload);
 });
 
 function launchRequest(req) {
@@ -63,14 +74,29 @@ function sessionEndedRequest(req) {
   return buildResponse("Pow pow zow!", true);
 }
 
+function arrivalsToText(arrivals) {
+  var text = '';
+  var adjArrivals = trainEtaHelper.parseEtas(arrivals);
+  for (var i = 0; i < adjArrivals.length; i++) {
+    var tmp = adjArrivals[i];
+    var timeTill = dateHelper.secondsToHuman(
+      dateHelper.secondsTill(dateHelper.parse(tmp[3])));
+    text += tmp[0] + " line with " + tmp[2] + " arriving at station in " + timeTill + ". ";
+  }
+  return text;
+}
+
 var intents = {
   "TrainArrivals": function(slots) {
     var station = slots.Station.value
-    var route = slots.Route.value
-    var say = '';
-    switch(relation) {
+    var route; 
+    if (slots.Route) route = slots.Route.value;
+
+    if (route) {
+      return cta.train.arrivals.byStationNameAndColor(station, route);
+    } else {
+      return cta.train.arrivals.byStationName(station);
     }
-    return buildResponse(say, true);
   }
 }
 

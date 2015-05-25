@@ -1,7 +1,7 @@
 {
   "intents": [
     {
-      "intent": "TrainArrival",
+      "intent": "TrainArrivals",
       "slots": [
         {
           "name": "Station",
