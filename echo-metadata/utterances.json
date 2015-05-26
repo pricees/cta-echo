@@ -1,10 +1,10 @@
 TrainArrivals arrivals for {sheridan|Station} station
-TrainArrivals arrivals for {sheridan|Station} {red|Color} line 
+TrainArrivals arrivals for {sheridan|Station} {red|Route} line 
 TrainArrivals arrivals for {belmont|Station} station
-TrainArrivals arrivals for {belmont|Station} {red|Color} line 
-TrainArrivals arrivals for {belmont|Station} {brown|Color} line 
-TrainArrivals {sheridan|Station} station {red|Color} line 
-TrainArrivals {sheridan|Station} station {brown|Color} line 
+TrainArrivals arrivals for {belmont|Station} {red|Route} line 
+TrainArrivals arrivals for {belmont|Station} {brown|Route} line 
+TrainArrivals {sheridan|Station} station {red|Route} line 
+TrainArrivals {sheridan|Station} station {brown|Route} line 
 TrainArrivals {sheridan|Station} station
-TrainArrivals {belmont|Station} {red|Color} line 
-TrainArrivals {belmont|Station} {brown|Color} line 
+TrainArrivals {belmont|Station} {red|Route} line 
+TrainArrivals {belmont|Station} {brown|Route} line 
