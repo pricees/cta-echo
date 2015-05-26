@@ -92,11 +92,7 @@ var intents = {
     var route; 
     if (slots.Route) route = slots.Route.value;
 
-    if (route) {
-      return cta.train.arrivals.byStationNameAndColor(station, route);
-    } else {
-      return cta.train.arrivals.byStationName(station);
-    }
+    return cta.train.arrivals.byStationNameAndColor(station, route);
   }
 }
 

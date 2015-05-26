@@ -1,6 +1,6 @@
 {
   "name": "CTA-Echo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Amazon Echo app for retrieving CTA information",
   "main": "server.js",
   "scripts": {
